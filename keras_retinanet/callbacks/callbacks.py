@@ -24,7 +24,7 @@ SOFTWARE.
 
 from __future__ import print_function
 
-from ..utils.anchors import compute_overlap
+from utils.anchors import compute_overlap
 import keras
 import os
 import cv2

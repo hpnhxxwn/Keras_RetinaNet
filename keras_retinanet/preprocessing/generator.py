@@ -28,15 +28,15 @@ import threading
 import warnings
 import keras
 
-from ..utils.anchors import anchor_targets_bbox
-from ..utils.anchors import anchors_for_shape
-from ..utils.anchors import guess_shapes
-from ..preprocessing.image import TransformParameters
-from ..preprocessing.image import adjust_transform_for_image
-from ..preprocessing.image import apply_transform
-from ..preprocessing.image import preprocess_image
-from ..preprocessing.image import resize_image
-from ..preprocessing.image import transform_aabb
+from utils.anchors import anchor_targets_bbox
+from utils.anchors import anchors_for_shape
+from utils.anchors import guess_shapes
+from preprocessing.image import TransformParameters
+from preprocessing.image import adjust_transform_for_image
+from preprocessing.image import apply_transform
+from preprocessing.image import preprocess_image
+from preprocessing.image import resize_image
+from preprocessing.image import transform_aabb
 
 
 class Generator(object):

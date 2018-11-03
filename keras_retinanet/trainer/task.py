@@ -28,11 +28,22 @@ import sys
 import os
 
 
-if __name__ == '__main__' and __package__ is None:
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+# print(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+__package__ = "keras_retinanet.trainer"
+  # Your model.py file.
+
+
+if __name__ == '__main__':
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')))
+    # print(os.path.dirname(os.path.abspath(__file__)))
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')))
+    # print(sys.path)
     __package__ = "keras_retinanet.trainer"
 
-    from ..trainer import model  # Your model.py file.
+    # from ..trainer import model  # Your model.py file.
+    import model
 
     """ Parse the arguments.
     """

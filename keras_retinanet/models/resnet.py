@@ -26,10 +26,10 @@ import keras
 from keras.utils import get_file
 import keras_resnet
 import keras_resnet.models
-from ..models import retinanet
+from models import retinanet
 
-from ..models.model_backbone import Backbone
-from ..preprocessing.image import preprocess_image
+from models.model_backbone import Backbone
+from preprocessing.image import preprocess_image
 
 
 class ResNetBackbone(Backbone):

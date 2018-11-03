@@ -32,9 +32,9 @@ class Backbone(object):
 
     def __init__(self, backbone):
         # a dictionary mapping custom layer names to the correct classes
-        from ..utils import layers
-        from ..utils import losses
-        from ..utils import initializers
+        from utils import layers
+        from utils import losses
+        from utils import initializers
         self.custom_objects = {
             'UpsampleLike': layers.UpsampleLike,
             'PriorProbability': initializers.PriorProbability,
@@ -75,7 +75,7 @@ def backbone(backbone_name):
     """ Returns a backbone object for the given backbone.
     """
     if 'resnet' in backbone_name:
-        from ..models.resnet import ResNetBackbone as b
+        from models.resnet import ResNetBackbone as b
     else:
         raise NotImplementedError('Backbone class for  \'{}\' not implemented.'.format(backbone))
 

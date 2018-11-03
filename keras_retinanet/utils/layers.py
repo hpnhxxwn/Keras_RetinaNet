@@ -23,7 +23,7 @@ SOFTWARE.
 """
 
 import keras
-from ..utils import anchors as utils_anchors
+from utils import anchors as utils_anchors
 import numpy as np
 import tensorflow as tf
 

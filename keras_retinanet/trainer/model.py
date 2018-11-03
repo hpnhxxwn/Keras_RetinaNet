@@ -29,15 +29,15 @@ from keras.utils import multi_gpu_model
 import tensorflow as tf
 
 # Change these to absolute imports if you copy this script outside the keras_retinanet package.
-from ..utils import losses
-from ..models import model_backbone
-from ..models.retinanet import retinanet_bbox
-from ..utils.anchors import make_shapes_callback
-from ..callbacks.callbacks import RedirectModel
-from ..callbacks.callbacks import Evaluate
-from ..preprocessing.open_images import OpenImagesGenerator
-from ..preprocessing.image import random_transform_generator
-from ..utils import freeze as freeze_model
+from utils import losses
+from models import model_backbone
+from models.retinanet import retinanet_bbox
+from utils.anchors import make_shapes_callback
+from callbacks.callbacks import RedirectModel
+from callbacks.callbacks import Evaluate
+from preprocessing.open_images import OpenImagesGenerator
+from preprocessing.image import random_transform_generator
+from utils import freeze as freeze_model
 
 
 def makedirs(path):

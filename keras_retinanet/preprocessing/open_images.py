@@ -30,8 +30,8 @@ import warnings
 import numpy as np
 from PIL import Image
 
-from ..preprocessing.generator import Generator
-from ..preprocessing.image import read_image_bgr
+from preprocessing.generator import Generator
+from preprocessing.image import read_image_bgr
 
 
 def load_hierarchy(metadata_dir, version='challenge2018'):

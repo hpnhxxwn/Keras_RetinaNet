@@ -23,8 +23,8 @@ SOFTWARE.
 """
 
 import keras
-from ..utils import initializers
-from ..utils import layers
+from utils import initializers
+from utils import layers
 import numpy as np
 
 
