@@ -28,10 +28,11 @@ import sys
 
 
 if __name__ == '__main__' and __package__ is None:
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+    sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', '..'))
+    sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), '..'))
     __package__ = "keras_retinanet.trainer"
 
-from ..models import model_backbone
+from models import model_backbone
 
 
 def parse_args(args):
@@ -82,6 +83,7 @@ def main(args=None):
     # save model
     model_out_path = os.path.join(args.main_dir, 'keras_retinanet', 'trainer', 'snapshots')
     model_out = os.path.join(model_out_path, '{}_inference.h5'.format(args.model_in))
+    print(model_out)
     model.save(model_out)
 
 

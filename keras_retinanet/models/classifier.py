@@ -33,7 +33,7 @@ from sklearn.ensemble import RandomForestClassifier
 def vr_bb_classifier(main_dir):
 
     path = os.path.join(main_dir, 'challenge2018')
-    train_file = "relationship_triplets_annotations.csv"
+    train_file = "/relationship_triplets_annotations.csv"
 
     train = pd.read_csv(path + train_file)
 

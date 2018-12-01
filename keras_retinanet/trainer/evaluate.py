@@ -32,13 +32,15 @@ import csv
 import pandas as pd
 
 if __name__ == '__main__' and __package__ is None:
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+    sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', '..'))
+    sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), '..'))
     __package__ = "keras_retinanet.trainer"
 
+print(sys.path)
 # Change these to absolute imports if you copy this script outside the keras_retinanet package.
-from ..models import model_backbone
-from ..preprocessing.image import read_image_bgr, preprocess_image, resize_image
-from ..models import classifier
+from models import model_backbone
+from preprocessing.image import read_image_bgr, preprocess_image, resize_image
+from models import classifier
 
 
 def parse_args(args):
@@ -110,43 +112,44 @@ def get_annotations(base_dir, model):
     id_annotations = dict()
     count = 0
     for img in os.listdir(base_dir):
-        try:
-            img_path = os.path.join(base_dir, img)
-            raw_image = read_image_bgr(img_path)
-            image = preprocess_image(raw_image.copy())
-            image, scale = resize_image(image, min_side=600, max_side=600)
-            height, width, _ = image.shape
+        # try:
+        img_path = os.path.join(base_dir, img)
+        raw_image = read_image_bgr(img_path)
+        image = preprocess_image(raw_image.copy())
+        image, scale = resize_image(image, min_side=343, max_side=514)
+        height, width, _ = image.shape
 
-            img_id = img.strip('.jpg')
+        img_id = img.strip('.jpg')
 
-            # run network
-            boxes, scores, labels = model.predict_on_batch(np.expand_dims(image, axis=0))
+        # run network
+        # print(model.predict_on_batch(np.expand_dims(image, axis=0)))
+        boxes, scores, labels = model.predict_on_batch(np.expand_dims(image, axis=0))
 
-            # boxes in (x1, y1, x2, y2) format
-            new_boxes2 = []
-            for box in boxes[0]:
-                x1_int = round((box[0] / width), 3)
-                y1_int = round((box[1] / height), 3)
-                x2_int = round((box[2] / width), 3)
-                y2_int = round((box[3] / height), 3)
-                new_boxes2.extend([x1_int, y1_int, x2_int, y2_int])
+        # boxes in (x1, y1, x2, y2) format
+        new_boxes2 = []
+        for box in boxes[0]:
+            x1_int = round((box[0] / width), 3)
+            y1_int = round((box[1] / height), 3)
+            x2_int = round((box[2] / width), 3)
+            y2_int = round((box[3] / height), 3)
+            new_boxes2.extend([x1_int, y1_int, x2_int, y2_int])
 
-            new_list = [new_boxes2[i:i + 4] for i in range(0, len(new_boxes2), 4)]
+        new_list = [new_boxes2[i:i + 4] for i in range(0, len(new_boxes2), 4)]
 
-            annotation = {'cls_label': labels, 'box_values': new_list, 'scores': scores}
+        annotation = {'cls_label': labels, 'box_values': new_list, 'scores': scores}
 
-            if img_id in id_annotations:
-                annotations = id_annotations[img_id]
-                annotations['boxes'].append(annotation)
-            else:
-                id_annotations[img_id] = {'boxes': [annotation]}
+        if img_id in id_annotations:
+            annotations = id_annotations[img_id]
+            annotations['boxes'].append(annotation)
+        else:
+            id_annotations[img_id] = {'boxes': [annotation]}
 
-            count += 1
-            print("{0}/99999".format(count))
+        count += 1
+        print("{0}/99999".format(count))
 
-        except:
-            print("Did not evaluate {}".format(img))
-            continue
+        # except:
+        #     print("Did not evaluate {}".format(img))
+        #     continue
 
     return id_annotations
 
