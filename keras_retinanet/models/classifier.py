@@ -28,6 +28,7 @@ from sklearn.multioutput import MultiOutputClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.ensemble import RandomForestClassifier
+import pickle
 
 
 def vr_bb_classifier(main_dir):
@@ -90,6 +91,8 @@ def vr_bb_classifier(main_dir):
     forest = RandomForestClassifier(n_estimators=500,
                                     verbose=1)
     LogReg = MultiOutputClassifier(forest).fit(X_train, y_train)
+    with open('VRLogReg.pkl', 'wb') as f:
+        pickle.dump(LogReg, f)
 
     # y_pred = LogReg.predict(X_test)
     # print(classification_report(y_test, y_pred))

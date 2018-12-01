@@ -490,6 +490,7 @@ def main(args=None):
 
     elif args.train_type == 'vr':
         id_annotations = get_annotations(base_dir, model)
+        print(id_annotations)
         print("Evaluation Completed")
 
         print("Starting Visual Relationship Bounding Box Classifier Training")
