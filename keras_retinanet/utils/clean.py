@@ -27,22 +27,22 @@ SOFTWARE.
 import pandas as pd
 import os
 
-path_to_datafiles = "/home/mukeshmithrakumar/googleai/gcmount/challenge2018/"
+path_to_datafiles = "/mnt/disks/disk1/challenge2018/"
 
 # code to load the train annotation box
 print("Reading challenge-2018-train-annotations-bbox.csv ....")
-challenge_2018_train_annotations_bbox = pd.read_csv(path_to_datafiles + "challenge-2018-train-annotations-bbox2.csv")
+challenge_2018_train_annotations_bbox = pd.read_csv(path_to_datafiles + "challenge-2018-train-annotations-bbox.csv")
 challenge_2018_train_annotations_bbox = pd.DataFrame(challenge_2018_train_annotations_bbox)
 print("challenge_2018_train_annotations_bbox shape:", challenge_2018_train_annotations_bbox.shape)
 
 # code to load the validation annotation box
 print("Reading challenge-2018-image-ids-valset-od.csv ....")
-challenge_2018_image_ids_valset_od = pd.read_csv(path_to_datafiles + "challenge-2018-image-ids-valset-od2.csv")
+challenge_2018_image_ids_valset_od = pd.read_csv(path_to_datafiles + "challenge-2018-image-ids-valset-od.csv")
 challenge_2018_image_ids_valset_od = pd.DataFrame(challenge_2018_image_ids_valset_od)
 print("challenge_2018_image_ids_valset_od shape:", challenge_2018_image_ids_valset_od.shape)
 
 # goes to the directory of the train/val images and creates a list of the downloaded images
-directory = "/home/mukeshmithrakumar/googleai/gcmount/images/train/train"
+directory = "/mnt/disks/disk1/Keras_RetinaNet/images/train/train"
 downloaded_list = []
 print("Parsing downloaded files ....")
 for filename in os.listdir(directory):
