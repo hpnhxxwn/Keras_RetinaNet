@@ -91,7 +91,8 @@ def vr_bb_classifier(main_dir):
     forest = RandomForestClassifier(n_estimators=500,
                                     verbose=1)
     LogReg = MultiOutputClassifier(forest).fit(X_train, y_train)
-    with open('VRLogReg.pkl', 'wb') as f:
+    dump_path = os.path.join(main_dir, 'VRLogReg.pkl')
+    with open(dump_path, 'wb') as f:
         pickle.dump(LogReg, f)
 
     # y_pred = LogReg.predict(X_test)

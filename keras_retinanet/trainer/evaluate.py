@@ -30,6 +30,7 @@ import sys
 import os
 import csv
 import pandas as pd
+import pickle
 
 if __name__ == '__main__' and __package__ is None:
     sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', '..'))
@@ -124,6 +125,9 @@ def get_annotations(base_dir, model):
         # run network
         # print(model.predict_on_batch(np.expand_dims(image, axis=0)))
         boxes, scores, labels = model.predict_on_batch(np.expand_dims(image, axis=0))
+        print(boxes)
+        print(scores)
+        print(labels)
 
         # boxes in (x1, y1, x2, y2) format
         new_boxes2 = []
@@ -473,8 +477,12 @@ def main(args=None):
         print("Starting Object Detection Prediction")
         od(id_annotations, args.main_dir)
 
-        print("Starting Visual Relationship Bounding Box Classifier Training")
-        logreg = classifier.vr_bb_classifier(args.main_dir)
+        if os.path.exists(os.path.join(args.main_dir, 'VRLogReg.pkl')):
+            with open(os.path.join(args.main_dir, 'VRLogReg.pkl'), "rb") as f:
+                logreg = pickle.load(f)
+        else:
+            print("Starting Visual Relationship Bounding Box Classifier Training")
+            logreg = classifier.vr_bb_classifier(args.main_dir)
 
         print("Starting Visual Relationship Bounding Box Prediction")
         vr(id_annotations, logreg, args.main_dir)
@@ -493,8 +501,12 @@ def main(args=None):
         print(id_annotations)
         print("Evaluation Completed")
 
-        print("Starting Visual Relationship Bounding Box Classifier Training")
-        logreg = classifier.vr_bb_classifier(args.main_dir)
+        if os.path.exists(os.path.join(args.main_dir, 'VRLogReg.pkl')):
+            with open(os.path.join(args.main_dir, 'VRLogReg.pkl'), "rb") as f:
+                logreg = pickle.load(f)
+        else:
+            print("Starting Visual Relationship Bounding Box Classifier Training")
+            logreg = classifier.vr_bb_classifier(args.main_dir)
 
         print("Starting Visual Relationship Bounding Box Prediction")
         vr(id_annotations, logreg, args.main_dir)
